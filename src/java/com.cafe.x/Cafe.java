@@ -1,5 +1,7 @@
 package com.cafe.x;
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 
 import static com.cafe.x.Cafe.MenuItem.CHEESE_SANDWICH;
 import static com.cafe.x.Cafe.MenuItem.COFFEE;
@@ -39,8 +41,8 @@ public class Cafe {
         }
     };
 
-    public BigDecimal purchaseValue(MenuItem menuItem) {
+    public BigDecimal purchaseValue(MenuItem... menuItems) {
 
-        return menuItem.getPrice();
+        return menuItems[0].getPrice();
     }
 }
