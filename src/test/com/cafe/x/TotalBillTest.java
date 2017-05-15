@@ -38,6 +38,13 @@ public class TotalBillTest {
         assert totalCost.equals(new BigDecimal("1.50"));
     }
 
+    @Test
+    public void Given_OneCheeseSandwich_Then_CustomerPay2poundsAnd20PenceServiceCharge() {
+        Cafe bill = new Cafe();
+        BigDecimal totalCost = bill.calculateBill(purchasedItems(CHEESE_SANDWICH));
+        assert totalCost.equals(new BigDecimal("2.20"));
+    }
+
     public List<Cafe.MenuItem> purchasedItems(Cafe.MenuItem... menuItems) {
         return Arrays.asList(menuItems);
     }
