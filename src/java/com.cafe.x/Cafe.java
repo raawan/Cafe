@@ -43,6 +43,7 @@ public class Cafe {
 
     public BigDecimal purchaseValue(MenuItem... menuItems) {
 
-        return menuItems[0].getPrice();
+        return Arrays.stream(menuItems).map(menuItem -> menuItem.getPrice()).
+                reduce((price1, price2) -> price1.add(price2)).orElse(new BigDecimal("0.00"));
     }
 }
