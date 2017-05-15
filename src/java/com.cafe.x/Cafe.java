@@ -49,6 +49,16 @@ public class Cafe {
     }
 
     public BigDecimal getServiceCharge(List<MenuItem> menuItems) {
-        return new BigDecimal("0.20");
+        BigDecimal serviceCharge = new BigDecimal("0.00") ;
+        for(MenuItem menuItem : menuItems) {
+            BigDecimal itemPriceInPennnies = menuItem.getPrice().multiply(BigDecimal.valueOf(100));
+            if(menuItem.equals(MenuItem.CHEESE_SANDWICH)) {
+                itemPriceInPennnies =  itemPriceInPennnies.multiply(new BigDecimal("0.1"));
+            } else if(menuItem.equals(MenuItem.STEAK_SANDWICH))  {
+                itemPriceInPennnies = itemPriceInPennnies.multiply(new BigDecimal("0.2"));
+            }
+            serviceCharge = serviceCharge.add(itemPriceInPennnies);
+        }
+        return serviceCharge.divide(BigDecimal.valueOf(100)).setScale(2);
     }
 }
