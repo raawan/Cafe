@@ -1,11 +1,7 @@
 package com.cafe.x;
-import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.List;
 
-import static com.cafe.x.Cafe.MenuItem.CHEESE_SANDWICH;
-import static com.cafe.x.Cafe.MenuItem.COFFEE;
-import static com.cafe.x.Cafe.MenuItem.COLA;
+import java.math.BigDecimal;
+import java.util.List;
 
 
 public class Cafe {
@@ -17,6 +13,12 @@ public class Cafe {
         STEAK_SANDWICH("Steak Sandwich",new BigDecimal("4.50"));
 
         private String name;
+        private BigDecimal price;
+
+        MenuItem(String name,BigDecimal price) {
+            this.name=name;
+            this.price=price;
+        }
 
         public BigDecimal getPrice() {
             return price;
@@ -24,12 +26,6 @@ public class Cafe {
 
         public void setPrice(BigDecimal price) {
             this.price = price;
-        }
-
-        private BigDecimal price;
-        MenuItem(String name,BigDecimal price) {
-            this.name=name;
-            this.price=price;
         }
 
         public String getName() {
@@ -58,6 +54,13 @@ public class Cafe {
         for(MenuItem menuItem : menuItems) {
             serviceCharge = serviceCharge.add(foodItemServiceCharge(menuItem));
         }
+        return finalServiceCharge(serviceCharge);
+    }
+
+    private BigDecimal finalServiceCharge(BigDecimal serviceCharge) {
+        /*
+        Max 20 pound tip
+         */
         if(serviceCharge.compareTo(new BigDecimal("2000"))>0) {
             return new BigDecimal("20.00");
         }
@@ -65,6 +68,9 @@ public class Cafe {
     }
 
     private BigDecimal foodItemServiceCharge(MenuItem menuItem) {
+        /*
+        For given data no need to distinguish between hot and cold food
+         */
         BigDecimal itemPriceInPennies = convertInPennies(menuItem.getPrice());
         if(menuItem.equals(MenuItem.CHEESE_SANDWICH)) {
             return  itemPriceInPennies.multiply(new BigDecimal("0.1"));
