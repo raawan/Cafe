@@ -4,6 +4,7 @@ package com.cafe.x;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import static com.cafe.x.Cafe.MenuItem.*;
@@ -45,7 +46,22 @@ public class TotalBillTest {
         assert totalCost.equals(new BigDecimal("2.20"));
     }
 
-    public List<Cafe.MenuItem> purchasedItems(Cafe.MenuItem... menuItems) {
+    @Test
+    public void Given_23SteakSandwiches_Then_CustomerPay_123poundsAnd50Pence() {
+        Cafe bill = new Cafe();
+        BigDecimal totalCost = bill.calculateBill(purchased23HotSandwichesItems(STEAK_SANDWICH));
+        assert totalCost.equals(new BigDecimal("123.50"));
+    }
+
+    private List<Cafe.MenuItem> purchased23HotSandwichesItems(Cafe.MenuItem steakSandwich) {
+        List<Cafe.MenuItem> steakSandwiches = new ArrayList<>();
+        for (int i =0;i<23;i++) {
+            steakSandwiches.add(Cafe.MenuItem.STEAK_SANDWICH);
+        }
+        return steakSandwiches;
+    }
+
+    private List<Cafe.MenuItem> purchasedItems(Cafe.MenuItem... menuItems) {
         return Arrays.asList(menuItems);
     }
 }
