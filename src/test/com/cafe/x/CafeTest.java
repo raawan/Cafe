@@ -13,6 +13,6 @@ public class CafeTest {
 
         Cafe cafe  = new Cafe();
         BigDecimal totalCost = cafe.purchaseValue("Cola");
-        assert totalCost == new BigDecimal("0.50");
+        assert totalCost.equals(new BigDecimal("0.50"));
     }
 }
