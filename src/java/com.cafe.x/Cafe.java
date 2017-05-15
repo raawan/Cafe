@@ -58,6 +58,9 @@ public class Cafe {
         for(MenuItem menuItem : menuItems) {
             serviceCharge = serviceCharge.add(foodItemServiceCharge(menuItem));
         }
+        if(serviceCharge.compareTo(new BigDecimal("2000"))>0) {
+            return new BigDecimal("20.00");
+        }
         return convertInPoundAndPenceFormat(serviceCharge);
     }
 
