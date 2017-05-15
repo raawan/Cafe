@@ -5,6 +5,10 @@ import java.math.BigDecimal;
 public class Cafe {
 
     public BigDecimal purchaseValue(String menuItem) {
-        return new BigDecimal("0.50");
+        if(menuItem.equalsIgnoreCase("cola")) {
+            return new BigDecimal("0.50");
+        } else {
+            return new BigDecimal("1.00");
+        }
     }
 }
