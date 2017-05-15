@@ -6,44 +6,13 @@ import java.util.List;
 
 public class Bill {
 
-    public enum MenuItem {
-        COLA("cola",new BigDecimal("0.50")),
-        CHEESE_SANDWICH("Cheese Sandwich",new BigDecimal("2.00")),
-        COFFEE("Coffee",new BigDecimal("1.00")),
-        STEAK_SANDWICH("Steak Sandwich",new BigDecimal("4.50"));
-
-        private String name;
-        private BigDecimal price;
-
-        MenuItem(String name,BigDecimal price) {
-            this.name=name;
-            this.price=price;
-        }
-
-        public BigDecimal getPrice() {
-            return price;
-        }
-
-        public void setPrice(BigDecimal price) {
-            this.price = price;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-    };
-
-    public BigDecimal calculateBill(List<MenuItem> menuItems) {
+    public BigDecimal calculateBill(List<Menu.MenuItem> menuItems) {
 
         BigDecimal totalCost = purchaseValue(menuItems);
         return totalCost.add(getServiceCharge(menuItems));
     }
 
-    public BigDecimal purchaseValue(List<MenuItem> menuItems) {
+    public BigDecimal purchaseValue(List<Menu.MenuItem> menuItems) {
 
         return menuItems.stream().
                 map(menuItem -> menuItem.getPrice()).
@@ -51,9 +20,9 @@ public class Bill {
                 orElse(new BigDecimal("0.00"));
     }
 
-    public BigDecimal getServiceCharge(List<MenuItem> menuItems) {
+    public BigDecimal getServiceCharge(List<Menu.MenuItem> menuItems) {
         BigDecimal serviceCharge = new BigDecimal("0.00") ;
-        for(MenuItem menuItem : menuItems) {
+        for(Menu.MenuItem menuItem : menuItems) {
             serviceCharge = serviceCharge.add(foodItemServiceCharge(menuItem));
         }
         return finalServiceCharge(serviceCharge);
@@ -69,14 +38,14 @@ public class Bill {
         return convertInPoundAndPenceFormat(serviceCharge);
     }
 
-    private BigDecimal foodItemServiceCharge(MenuItem menuItem) {
+    private BigDecimal foodItemServiceCharge(Menu.MenuItem menuItem) {
         /*
         For given data no need to distinguish between hot and cold food
          */
         BigDecimal itemPriceInPennies = convertInPennies(menuItem.getPrice());
-        if(menuItem.equals(MenuItem.CHEESE_SANDWICH)) {
+        if(menuItem.equals(Menu.MenuItem.CHEESE_SANDWICH)) {
             return  itemPriceInPennies.multiply(new BigDecimal("0.1"));
-        } else if(menuItem.equals(MenuItem.STEAK_SANDWICH)) {
+        } else if(menuItem.equals(Menu.MenuItem.STEAK_SANDWICH)) {
             return itemPriceInPennies.multiply(new BigDecimal("0.2"));
         }
         return new BigDecimal("0.00");

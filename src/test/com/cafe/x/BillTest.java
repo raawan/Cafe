@@ -2,7 +2,7 @@ package com.cafe.x;
 
 
 import org.junit.jupiter.api.Test;
-import static com.cafe.x.Bill.MenuItem.*;
+import static com.cafe.x.Menu.MenuItem.*;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
@@ -53,7 +53,7 @@ public class BillTest {
         assert totalCost.equals(new BigDecimal("6.00"));
     }
 
-    private List<Bill.MenuItem> purchasedItems(Bill.MenuItem... menuItems) {
+    private List<Menu.MenuItem> purchasedItems(Menu.MenuItem... menuItems) {
         return Arrays.asList(menuItems);
     }
 }

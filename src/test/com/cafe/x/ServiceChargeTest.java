@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.cafe.x.Bill.MenuItem.*;
+import static com.cafe.x.Menu.MenuItem.*;
 
 public class ServiceChargeTest {
 
@@ -34,7 +34,7 @@ public class ServiceChargeTest {
         assert totalCost.equals(new BigDecimal("1.50"));
     }
 
-    public List<Bill.MenuItem> purchasedItems(Bill.MenuItem... menuItems) {
+    public List<Menu.MenuItem> purchasedItems(Menu.MenuItem... menuItems) {
         return Arrays.asList(menuItems);
     }
 }
