@@ -41,7 +41,11 @@ public class Cafe {
         }
     };
 
+    public BigDecimal calculateBill(List<MenuItem> menuItems) {
 
+        BigDecimal totalCost = purchaseValue(menuItems);
+        return totalCost.add(getServiceCharge(menuItems));
+    }
 
     public BigDecimal purchaseValue(List<MenuItem> menuItems) {
 
@@ -60,11 +64,11 @@ public class Cafe {
     private BigDecimal foodItemServiceCharge(MenuItem menuItem) {
         BigDecimal itemPriceInPennies = convertInPennies(menuItem.getPrice());
         if(menuItem.equals(MenuItem.CHEESE_SANDWICH)) {
-            itemPriceInPennies =  itemPriceInPennies.multiply(new BigDecimal("0.1"));
+            return  itemPriceInPennies.multiply(new BigDecimal("0.1"));
         } else if(menuItem.equals(MenuItem.STEAK_SANDWICH)) {
-            itemPriceInPennies = itemPriceInPennies.multiply(new BigDecimal("0.2"));
+            return itemPriceInPennies.multiply(new BigDecimal("0.2"));
         }
-        return itemPriceInPennies;
+        return new BigDecimal("0.00");
     }
 
     private BigDecimal convertInPennies(BigDecimal valueInPoundsAndPennyFormat) {
