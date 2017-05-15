@@ -8,27 +8,39 @@ import static com.cafe.x.Cafe.MenuItem.COLA;
 
 public class Cafe {
 
+
     public enum MenuItem {
-        COLA("cola"),
-        CHEESE_SANDWICH("Cheese Sandwich"),
-        COFFEE("Coffee");
+        COLA("cola",new BigDecimal("0.50")),
+        CHEESE_SANDWICH("Cheese Sandwich",new BigDecimal("2.00")),
+        COFFEE("Coffee",new BigDecimal("1.00"));
 
         private String name;
-        MenuItem(String name) {
+
+        public BigDecimal getPrice() {
+            return price;
+        }
+
+        public void setPrice(BigDecimal price) {
+            this.price = price;
+        }
+
+        private BigDecimal price;
+        MenuItem(String name,BigDecimal price) {
             this.name=name;
+            this.price=price;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
         }
     };
 
     public BigDecimal purchaseValue(MenuItem menuItem) {
-        switch(menuItem) {
-            case CHEESE_SANDWICH:
-                return new BigDecimal("2.00");
-            case COFFEE:
-                return new BigDecimal("1.00");
-            case COLA:
-                return new BigDecimal("0.50");
-            default:
-                return new BigDecimal("0.00");
-        }
+
+        return menuItem.getPrice();
     }
 }
