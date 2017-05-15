@@ -47,4 +47,8 @@ public class Cafe {
         return menuItems.stream().map(menuItem -> menuItem.getPrice()).
                 reduce((price1, price2) -> price1.add(price2)).orElse(new BigDecimal("0.00"));
     }
+
+    public BigDecimal getServiceCharge(List<MenuItem> menuItems) {
+        return new BigDecimal("0.20");
+    }
 }
