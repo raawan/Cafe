@@ -6,35 +6,35 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.cafe.x.Cafe.MenuItem.*;
+import static com.cafe.x.Bill.MenuItem.*;
 
 public class ServiceChargeTest {
 
     @Test
     public void Given_CheeseSandwich_ServiceCharge20pence() {
 
-        Cafe cafe  = new Cafe();
-        BigDecimal totalCost = cafe.getServiceCharge(purchasedItems(CHEESE_SANDWICH));
+        Bill bill = new Bill();
+        BigDecimal totalCost = bill.getServiceCharge(purchasedItems(CHEESE_SANDWICH));
         assert totalCost.equals(new BigDecimal("0.20"));
     }
 
     @Test
     public void Given_CheeseSandwichAndSteakSandwich_ServiceCharge1pound10pence() {
 
-        Cafe cafe  = new Cafe();
-        BigDecimal totalCost = cafe.getServiceCharge(purchasedItems(CHEESE_SANDWICH,STEAK_SANDWICH));
+        Bill bill = new Bill();
+        BigDecimal totalCost = bill.getServiceCharge(purchasedItems(CHEESE_SANDWICH,STEAK_SANDWICH));
         assert totalCost.equals(new BigDecimal("1.10"));
     }
 
     @Test
     public void Given_CoffeeAndCola_ServiceCharge0pence() {
 
-        Cafe cafe  = new Cafe();
-        BigDecimal totalCost = cafe.purchaseValue(purchasedItems(COFFEE,COLA));
+        Bill bill = new Bill();
+        BigDecimal totalCost = bill.purchaseValue(purchasedItems(COFFEE,COLA));
         assert totalCost.equals(new BigDecimal("1.50"));
     }
 
-    public List<Cafe.MenuItem> purchasedItems(Cafe.MenuItem... menuItems) {
+    public List<Bill.MenuItem> purchasedItems(Bill.MenuItem... menuItems) {
         return Arrays.asList(menuItems);
     }
 }

@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 
-public class Cafe {
+public class Bill {
 
     public enum MenuItem {
         COLA("cola",new BigDecimal("0.50")),
@@ -45,8 +45,10 @@ public class Cafe {
 
     public BigDecimal purchaseValue(List<MenuItem> menuItems) {
 
-        return menuItems.stream().map(menuItem -> menuItem.getPrice()).
-                reduce((price1, price2) -> price1.add(price2)).orElse(new BigDecimal("0.00"));
+        return menuItems.stream().
+                map(menuItem -> menuItem.getPrice()).
+                reduce((price1, price2) -> price1.add(price2)).
+                orElse(new BigDecimal("0.00"));
     }
 
     public BigDecimal getServiceCharge(List<MenuItem> menuItems) {
