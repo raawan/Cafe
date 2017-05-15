@@ -6,8 +6,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.cafe.x.Cafe.MenuItem.CHEESE_SANDWICH;
-import static com.cafe.x.Cafe.MenuItem.STEAK_SANDWICH;
+import static com.cafe.x.Cafe.MenuItem.*;
 
 public class ServiceChargeTest {
 
@@ -25,6 +24,14 @@ public class ServiceChargeTest {
         Cafe cafe  = new Cafe();
         BigDecimal totalCost = cafe.getServiceCharge(purchasedItems(CHEESE_SANDWICH,STEAK_SANDWICH));
         assert totalCost.equals(new BigDecimal("1.10"));
+    }
+
+    @Test
+    public void Given_CoffeeAndCola_ServiceCharge0pence() {
+
+        Cafe cafe  = new Cafe();
+        BigDecimal totalCost = cafe.purchaseValue(purchasedItems(COFFEE,COLA));
+        assert totalCost.equals(new BigDecimal("1.50"));
     }
 
     public List<Cafe.MenuItem> purchasedItems(Cafe.MenuItem... menuItems) {
