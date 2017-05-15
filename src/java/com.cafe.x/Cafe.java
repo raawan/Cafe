@@ -51,14 +51,26 @@ public class Cafe {
     public BigDecimal getServiceCharge(List<MenuItem> menuItems) {
         BigDecimal serviceCharge = new BigDecimal("0.00") ;
         for(MenuItem menuItem : menuItems) {
-            BigDecimal itemPriceInPennnies = menuItem.getPrice().multiply(BigDecimal.valueOf(100));
-            if(menuItem.equals(MenuItem.CHEESE_SANDWICH)) {
-                itemPriceInPennnies =  itemPriceInPennnies.multiply(new BigDecimal("0.1"));
-            } else if(menuItem.equals(MenuItem.STEAK_SANDWICH))  {
-                itemPriceInPennnies = itemPriceInPennnies.multiply(new BigDecimal("0.2"));
-            }
-            serviceCharge = serviceCharge.add(itemPriceInPennnies);
+            serviceCharge = serviceCharge.add(foodItemServiceCharge(menuItem));
         }
-        return serviceCharge.divide(BigDecimal.valueOf(100)).setScale(2);
+        return convertInPoundAndPenceFormat(serviceCharge);
+    }
+
+    private BigDecimal foodItemServiceCharge(MenuItem menuItem) {
+        BigDecimal itemPriceInPennnies = convertInPennies(menuItem.getPrice());
+        if(menuItem.equals(MenuItem.CHEESE_SANDWICH)) {
+            return itemPriceInPennnies.multiply(new BigDecimal("0.1"));
+        } else if(menuItem.equals(MenuItem.STEAK_SANDWICH)) {
+            return itemPriceInPennnies.multiply(new BigDecimal("0.2"));
+        }
+        return itemPriceInPennnies;
+    }
+
+    private BigDecimal convertInPennies(BigDecimal valueInPoundsAndPennyFormat) {
+        return valueInPoundsAndPennyFormat.multiply(BigDecimal.valueOf(100));
+    }
+
+    private BigDecimal convertInPoundAndPenceFormat(BigDecimal valueInPennies) {
+        return valueInPennies.divide(BigDecimal.valueOf(100)).setScale(2);
     }
 }
