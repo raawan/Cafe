@@ -36,4 +36,12 @@ public class CafeTest {
         BigDecimal totalCost = cafe.purchaseValue(COFFEE,COLA);
         assert totalCost.equals(new BigDecimal("1.50"));
     }
+
+    @Test
+    public void Given_TwoCola_then_CustomerPay1pound() {
+        Cafe cafe  = new Cafe();
+        BigDecimal totalCost = cafe.purchaseValue(COLA,COLA);
+        assert totalCost.equals(new BigDecimal("1.00"));
+    }
+
 }
