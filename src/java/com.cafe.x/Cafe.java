@@ -10,7 +10,6 @@ import static com.cafe.x.Cafe.MenuItem.COLA;
 
 public class Cafe {
 
-
     public enum MenuItem {
         COLA("cola",new BigDecimal("0.50")),
         CHEESE_SANDWICH("Cheese Sandwich",new BigDecimal("2.00")),
@@ -42,6 +41,8 @@ public class Cafe {
         }
     };
 
+
+
     public BigDecimal purchaseValue(List<MenuItem> menuItems) {
 
         return menuItems.stream().map(menuItem -> menuItem.getPrice()).
@@ -57,13 +58,13 @@ public class Cafe {
     }
 
     private BigDecimal foodItemServiceCharge(MenuItem menuItem) {
-        BigDecimal itemPriceInPennnies = convertInPennies(menuItem.getPrice());
+        BigDecimal itemPriceInPennies = convertInPennies(menuItem.getPrice());
         if(menuItem.equals(MenuItem.CHEESE_SANDWICH)) {
-            return itemPriceInPennnies.multiply(new BigDecimal("0.1"));
+            itemPriceInPennies =  itemPriceInPennies.multiply(new BigDecimal("0.1"));
         } else if(menuItem.equals(MenuItem.STEAK_SANDWICH)) {
-            return itemPriceInPennnies.multiply(new BigDecimal("0.2"));
+            itemPriceInPennies = itemPriceInPennies.multiply(new BigDecimal("0.2"));
         }
-        return itemPriceInPennnies;
+        return itemPriceInPennies;
     }
 
     private BigDecimal convertInPennies(BigDecimal valueInPoundsAndPennyFormat) {
