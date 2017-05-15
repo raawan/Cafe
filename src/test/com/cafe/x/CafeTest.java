@@ -46,7 +46,14 @@ public class CafeTest {
         assert totalCost.equals(new BigDecimal("1.00"));
     }
 
-    public List<Cafe.MenuItem> purchasedItems(Cafe.MenuItem... menuItems) {
+    @Test
+    public void Given_ColaCoffeeSteakSandwich_then_CustomerPay6Pounds(){
+        Cafe cafe  = new Cafe();
+        BigDecimal totalCost = cafe.purchaseValue(purchasedItems(COLA,COFFEE,STEAK_SANDWICH));
+        assert totalCost.equals(new BigDecimal("6.00"));
+    }
+
+    private List<Cafe.MenuItem> purchasedItems(Cafe.MenuItem... menuItems) {
         return Arrays.asList(menuItems);
     }
 }

@@ -14,7 +14,8 @@ public class Cafe {
     public enum MenuItem {
         COLA("cola",new BigDecimal("0.50")),
         CHEESE_SANDWICH("Cheese Sandwich",new BigDecimal("2.00")),
-        COFFEE("Coffee",new BigDecimal("1.00"));
+        COFFEE("Coffee",new BigDecimal("1.00")),
+        STEAK_SANDWICH("Steak Sandwich",new BigDecimal("4.50"));
 
         private String name;
 
